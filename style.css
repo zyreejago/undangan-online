@@ -1,0 +1,327 @@
+/* ============================================================
+   Undangan Digital "Umber Jawa" — kreasi orisinal
+   Palet tanah Jawa: krem, umber, tanah liat, emas pudar
+   ============================================================ */
+:root{
+  --cream:#F7F0E1;
+  --paper:#FFFDF7;
+  --ink:#3A2413;
+  --brown:#5C3A21;
+  --umber:#8A5A2B;
+  --clay:#B0713A;
+  --gold:#C6A15B;
+  --gold-soft:#E7D3A7;
+  --line:#DCC7A4;
+  --card:#FBF5E9;
+  --shadow:0 18px 40px rgba(58,36,19,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Jost",system-ui,sans-serif;
+  background:#2A1A0E;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.javanese{font-family:"Noto Sans Javanese","Jost",sans-serif}
+.kicker{
+  letter-spacing:.34em;text-transform:uppercase;
+  font-size:.72rem;font-weight:500;color:var(--umber);
+}
+.section-title{
+  font-family:"Cormorant Garamond",serif;font-weight:600;
+  font-size:1.9rem;color:var(--brown);margin:.35rem 0 1rem;
+}
+
+/* ---------- motif kawung samar ---------- */
+.kawung-bg{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%238A5A2B' stroke-opacity='0.10'%3E%3Cellipse cx='42' cy='20' rx='15' ry='21'/%3E%3Cellipse cx='42' cy='64' rx='15' ry='21'/%3E%3Cellipse cx='20' cy='42' rx='21' ry='15'/%3E%3Cellipse cx='64' cy='42' rx='21' ry='15'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ============ COVER ============ */
+.cover{
+  position:fixed;inset:0;z-index:50;overflow-y:auto;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #6B4325 0%, #3A2413 55%, #2A1A0E 100%);
+  padding:22px 16px;
+  transition:opacity .8s ease, visibility .8s;
+}
+.cover.opened{opacity:0;visibility:hidden;pointer-events:none}
+.cover-frame{
+  width:min(440px,100%);text-align:center;color:var(--cream);
+  border:1px solid rgba(198,161,91,.55);border-radius:18px;
+  padding:38px 26px 34px;position:relative;
+  background:
+    linear-gradient(rgba(42,26,14,.35),rgba(42,26,14,.35));
+  box-shadow:var(--shadow);
+}
+.cover-frame::before,.cover-frame::after{
+  content:"";position:absolute;width:54px;height:54px;
+  border:1px solid rgba(198,161,91,.8);
+}
+.cover-frame::before{top:8px;left:8px;border-right:none;border-bottom:none;border-radius:12px 0 0 0}
+.cover-frame::after{bottom:8px;right:8px;border-left:none;border-top:none;border-radius:0 0 12px 0}
+.cover-java{font-size:1.05rem;color:var(--gold-soft);opacity:.9}
+.cover-kicker{
+  letter-spacing:.4em;text-transform:uppercase;font-size:.72rem;
+  color:var(--gold-soft);margin-top:.9rem;
+}
+.gunungan{width:118px;height:auto;margin:14px auto 4px;display:block;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
+.cover-names{
+  font-family:"Great Vibes",cursive;font-weight:400;
+  font-size:3.4rem;line-height:1.15;color:#FFF6E3;
+  display:flex;flex-direction:column;align-items:center;
+}
+.cover-names .amp{font-size:1.9rem;color:var(--gold);line-height:.9}
+.cover-date{letter-spacing:.22em;font-size:.86rem;color:var(--gold-soft);margin-top:.4rem}
+.cover-guest{margin-top:30px;font-size:.95rem;line-height:1.55;color:#F1E4CC}
+.guest-name{
+  font-family:"Cormorant Garamond",serif;font-weight:700;
+  font-size:1.45rem;color:#FFF6E3;margin:.35rem 0 .3rem;
+}
+.guest-note{font-size:.72rem;font-style:italic;opacity:.75;line-height:1.5}
+.btn-open{
+  margin-top:24px;display:inline-flex;align-items:center;gap:.55rem;
+  background:linear-gradient(160deg,var(--clay),var(--umber));
+  color:#FFF6E3;border:1px solid rgba(231,211,167,.6);
+  font-family:"Jost",sans-serif;font-size:.95rem;font-weight:500;letter-spacing:.06em;
+  padding:.8rem 1.7rem;border-radius:999px;cursor:pointer;
+  box-shadow:0 12px 26px rgba(0,0,0,.35);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.btn-open:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(0,0,0,.4)}
+.btn-open:active{transform:translateY(0)}
+
+/* ============ HALAMAN ============ */
+.page{
+  max-width:480px;margin:0 auto;background:var(--cream);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%238A5A2B' stroke-opacity='0.07'%3E%3Cellipse cx='42' cy='20' rx='15' ry='21'/%3E%3Cellipse cx='42' cy='64' rx='15' ry='21'/%3E%3Cellipse cx='20' cy='42' rx='21' ry='15'/%3E%3Cellipse cx='64' cy='42' rx='21' ry='15'/%3E%3C/g%3E%3C/svg%3E");
+  min-height:100vh;box-shadow:0 0 60px rgba(0,0,0,.45);
+  padding:0 22px 40px;
+}
+.page section{text-align:center;padding:44px 0 8px}
+
+/* animasi muncul saat scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease, transform .9s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ---------- hero ---------- */
+.hero{padding-top:56px !important}
+.hero-java{font-size:1.1rem;color:var(--clay)}
+.hero-names{
+  font-family:"Great Vibes",cursive;font-weight:400;
+  font-size:3.6rem;line-height:1.2;color:var(--brown);margin:.3rem 0 .2rem;
+}
+.hero-names .amp{color:var(--gold);font-size:2.4rem}
+.hero-date{letter-spacing:.18em;font-size:.85rem;color:var(--umber)}
+.countdown{display:flex;gap:10px;justify-content:center;margin:26px 0 20px}
+.cd-box{
+  width:68px;padding:12px 0 10px;border-radius:14px;
+  background:linear-gradient(165deg,#6B4325,#4A2C15);
+  color:#FFF3DC;box-shadow:0 10px 22px rgba(74,44,21,.3);
+  border:1px solid rgba(198,161,91,.5);
+}
+.cd-num{display:block;font-family:"Cormorant Garamond",serif;font-size:1.7rem;font-weight:700;line-height:1}
+.cd-label{display:block;font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;margin-top:4px;color:var(--gold-soft)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid var(--umber);color:var(--brown);text-decoration:none;
+  padding:.62rem 1.35rem;border-radius:999px;font-size:.88rem;letter-spacing:.05em;
+  background:rgba(255,253,247,.6);transition:background .25s,color .25s;
+}
+.btn-ghost:hover{background:var(--umber);color:#FFF6E3}
+.btn-ghost.small{padding:.5rem 1.1rem;font-size:.82rem;margin-top:14px}
+
+/* ---------- pemisah ---------- */
+.divider{display:flex;align-items:center;gap:12px;padding:30px 34px 0}
+.divider span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.divider i{width:9px;height:9px;background:var(--gold);transform:rotate(45deg);display:block}
+
+/* ---------- ayat & intro ---------- */
+.verse .arabic{
+  font-size:1.35rem;line-height:2.2;color:var(--brown);
+  font-family:"Cormorant Garamond",serif;
+}
+.verse-text{font-style:italic;line-height:1.75;color:#5A4230;margin-top:14px;font-size:.98rem}
+.verse-src{margin-top:10px;font-weight:600;letter-spacing:.14em;font-size:.8rem;color:var(--umber)}
+.intro p{line-height:1.8;color:#5A4230;font-size:.98rem;max-width:38ch;margin:0 auto}
+
+/* ---------- mempelai ---------- */
+.person{padding:10px 0 4px}
+.portrait{
+  width:158px;height:158px;margin:0 auto 16px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;position:relative;
+  background:
+    radial-gradient(circle at 32% 28%, #E9D9B8 0%, #C8A15E 48%, #8A5A2B 100%);
+  border:3px solid var(--gold-soft);
+  box-shadow:0 0 0 7px var(--card), 0 0 0 8px var(--gold), 0 16px 30px rgba(92,58,33,.3);
+}
+.portrait-initial{
+  font-family:"Great Vibes",cursive;font-size:4.4rem;color:#FFF8EA;
+  text-shadow:0 3px 10px rgba(58,36,19,.45);line-height:1;
+}
+.person-java{color:var(--clay);font-size:.95rem}
+.person-name{
+  font-family:"Cormorant Garamond",serif;font-weight:700;
+  font-size:1.8rem;color:var(--brown);margin:.3rem 0 .45rem;
+}
+.person-desc{line-height:1.7;color:#5A4230;font-size:.95rem}
+.couple-amp{
+  font-family:"Great Vibes",cursive;font-size:2.6rem;color:var(--gold);
+  margin:12px 0 2px;
+}
+
+/* ---------- acara ---------- */
+.event-card{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:30px 24px 28px;margin:18px 0;box-shadow:0 14px 30px rgba(92,58,33,.1);
+  position:relative;overflow:hidden;
+}
+.event-card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%238A5A2B' stroke-opacity='0.08'%3E%3Cellipse cx='42' cy='20' rx='15' ry='21'/%3E%3Cellipse cx='42' cy='64' rx='15' ry='21'/%3E%3Cellipse cx='20' cy='42' rx='21' ry='15'/%3E%3Cellipse cx='64' cy='42' rx='21' ry='15'/%3E%3C/g%3E%3C/svg%3E");
+}
+.ring-icon{width:30px;height:30px;color:var(--clay)}
+.event-card h4{
+  font-family:"Cormorant Garamond",serif;font-size:1.65rem;font-weight:700;
+  color:var(--brown);margin:.4rem 0 .2rem;
+}
+.event-day{letter-spacing:.3em;text-transform:uppercase;font-size:.72rem;color:var(--umber)}
+.event-date{font-family:"Cormorant Garamond",serif;font-size:1.35rem;color:var(--brown)}
+.event-date strong{font-size:2.5rem;font-weight:700;color:var(--clay);vertical-align:-6px;margin-right:2px}
+.event-time{margin-top:4px;color:#5A4230}
+.event-place{margin-top:12px;line-height:1.65;color:#5A4230;font-size:.94rem}
+
+/* ---------- kisah ---------- */
+.timeline{position:relative;margin-top:10px;padding-left:20px;text-align:left}
+.timeline::before{
+  content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;
+  background:linear-gradient(var(--gold-soft),var(--gold),var(--gold-soft));
+}
+.story-item{position:relative;padding:0 0 26px 18px}
+.story-item::before{
+  content:"";position:absolute;left:-21px;top:6px;width:12px;height:12px;
+  background:var(--cream);border:3px solid var(--clay);border-radius:50%;
+}
+.story-year{
+  font-family:"Cormorant Garamond",serif;font-weight:700;font-size:1.25rem;color:var(--clay);
+}
+.story-item h4{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--brown);margin:.1rem 0 .3rem}
+.story-item p:last-child{line-height:1.75;color:#5A4230;font-size:.95rem}
+
+/* ---------- galeri ---------- */
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.g-item{
+  border-radius:16px;min-height:150px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);box-shadow:0 10px 22px rgba(92,58,33,.12);
+}
+.g-item span{
+  font-family:"Great Vibes",cursive;font-size:2rem;color:rgba(255,246,227,.92);
+  text-shadow:0 2px 8px rgba(42,26,14,.4);
+}
+.g-item figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:16px 10px 8px;
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#FFF3DC;
+  background:linear-gradient(transparent,rgba(42,26,14,.55));text-align:center;
+}
+.g-a{background:linear-gradient(160deg,#B0713A,#6B4325)}
+.g-b{background:linear-gradient(160deg,#C6A15B,#8A5A2B)}
+.g-c{background:linear-gradient(160deg,#7A4E24,#3A2413)}
+.g-d{background:linear-gradient(160deg,#A9803E,#5C3A21)}
+.g-e{background:linear-gradient(160deg,#96602C,#4A2C15)}
+.g-f{background:linear-gradient(160deg,#BE8B4A,#71471F)}
+.gallery-note{margin-top:14px;font-size:.8rem;font-style:italic;color:#8A7358}
+
+/* ---------- amplop ---------- */
+.gift-intro{line-height:1.75;color:#5A4230;font-size:.96rem;max-width:40ch;margin:0 auto}
+.gift-card{
+  background:linear-gradient(160deg,#553619,#3A2413);color:#F7EBD2;
+  border-radius:18px;padding:24px 22px;margin:18px 0;text-align:left;
+  border:1px solid rgba(198,161,91,.55);box-shadow:0 16px 32px rgba(58,36,19,.3);
+  position:relative;
+}
+.gift-bank{font-weight:600;letter-spacing:.3em;font-size:.85rem;color:var(--gold-soft)}
+.gift-number{
+  font-family:"Cormorant Garamond",serif;font-size:1.9rem;font-weight:700;
+  letter-spacing:.14em;margin:.5rem 0 .1rem;color:#FFF6E3;
+}
+.gift-owner{font-size:.9rem;opacity:.85}
+.gift-address{line-height:1.65;margin:.5rem 0 .2rem;font-size:1rem;color:#FFF6E3}
+.btn-copy{
+  margin-top:14px;background:rgba(231,211,167,.14);color:#FFF3DC;cursor:pointer;
+  border:1px solid rgba(231,211,167,.65);border-radius:999px;
+  font-family:"Jost",sans-serif;font-size:.82rem;letter-spacing:.05em;
+  padding:.5rem 1.15rem;transition:background .25s;
+}
+.btn-copy:hover{background:rgba(231,211,167,.3)}
+.btn-copy.copied{background:var(--gold);color:#3A2413;border-color:var(--gold)}
+
+/* ---------- rsvp ---------- */
+.rsvp-intro{line-height:1.75;color:#5A4230;font-size:.96rem;max-width:40ch;margin:0 auto}
+.rsvp-form{
+  margin-top:20px;text-align:left;background:var(--card);
+  border:1px solid var(--line);border-radius:20px;padding:24px 20px;
+  box-shadow:0 14px 30px rgba(92,58,33,.1);
+}
+.rsvp-form label{
+  display:block;font-size:.85rem;font-weight:500;color:var(--brown);
+  letter-spacing:.04em;margin-bottom:16px;
+}
+.rsvp-form input,.rsvp-form select,.rsvp-form textarea{
+  width:100%;margin-top:6px;padding:.72rem .85rem;border-radius:12px;
+  border:1px solid var(--line);background:#FFFDF7;color:var(--ink);
+  font-family:"Jost",sans-serif;font-size:.95rem;resize:vertical;
+}
+.rsvp-form input:focus,.rsvp-form select:focus,.rsvp-form textarea:focus{
+  outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold);
+}
+.rsvp-form .btn-open{width:100%;justify-content:center;margin-top:2px}
+.wish-list{margin-top:22px;text-align:left;display:flex;flex-direction:column;gap:12px}
+.wish{
+  background:#FFFDF7;border:1px solid var(--line);border-left:4px solid var(--gold);
+  border-radius:12px;padding:14px 16px;
+}
+.wish-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.wish-name{font-weight:600;color:var(--brown)}
+.wish-badge{
+  font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+  background:var(--gold-soft);color:#6B4A1F;border-radius:999px;padding:.22rem .6rem;
+}
+.wish-msg{margin-top:5px;line-height:1.65;color:#5A4230;font-size:.93rem}
+.wish-empty{color:#8A7358;font-style:italic;text-align:center}
+
+/* ---------- penutup & footer ---------- */
+.closing p{line-height:1.8;color:#5A4230;font-size:.97rem;max-width:40ch;margin:0 auto 12px}
+.closing-from{margin-top:18px !important}
+.closing-names{font-family:"Great Vibes",cursive;font-size:2.7rem;color:var(--brown);line-height:1.2}
+.closing-family{font-size:.86rem !important}
+.footer{
+  margin-top:36px;border-top:1px solid var(--line);padding-top:18px;
+  text-align:center;font-size:.72rem;line-height:1.6;color:#A08B6E;
+}
+
+/* ---------- tombol musik ---------- */
+.music-btn{
+  position:fixed;right:18px;bottom:18px;z-index:60;width:48px;height:48px;
+  border-radius:50%;border:1px solid rgba(231,211,167,.7);cursor:pointer;
+  background:linear-gradient(160deg,var(--clay),var(--umber));color:#FFF6E3;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 26px rgba(42,26,14,.4);
+}
+.music-btn.playing{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{
+  0%,100%{box-shadow:0 12px 26px rgba(42,26,14,.4),0 0 0 0 rgba(198,161,91,.45)}
+  50%{box-shadow:0 12px 26px rgba(42,26,14,.4),0 0 0 12px rgba(198,161,91,0)}
+}
+
+@media (max-width:380px){
+  .cover-names{font-size:2.8rem}
+  .hero-names{font-size:3rem}
+  .cd-box{width:60px}
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{transition:none;opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
