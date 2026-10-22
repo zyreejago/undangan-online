@@ -1,6 +1,7 @@
 /* ============================================================
    Undangan Digital — tema Jawa umber gelap (kreasi orisinal)
-   Dasar cokelat umber, aksen emas, judul serif Didone.
+   Full-bleed: section foto selebar viewport, foto berulang
+   horizontal; konten teks terpusat di kolom tengah.
    Mobile-first; desktop melebar menjadi grid multi kolom.
    ============================================================ */
 :root{
@@ -17,12 +18,14 @@
   --paper:#FAF7F0;
   --grey:#9AA0A6;
   --shadow:0 16px 38px rgba(20,10,2,.35);
+  --pad-x:max(20px, calc((100% - 1060px)/2));
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   font-family:"Jost",system-ui,sans-serif;color:var(--cream);
-  background:#1E1108;
+  background:var(--base);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23D9A441' stroke-opacity='0.05'%3E%3Cellipse cx='42' cy='20' rx='15' ry='21'/%3E%3Cellipse cx='42' cy='64' rx='15' ry='21'/%3E%3Cellipse cx='20' cy='42' rx='21' ry='15'/%3E%3Cellipse cx='64' cy='42' rx='21' ry='15'/%3E%3C/g%3E%3C/svg%3E");
   -webkit-font-smoothing:antialiased;
 }
 img{display:block;max-width:100%}
@@ -47,6 +50,7 @@ img{display:block;max-width:100%}
   font-family:"Great Vibes",cursive;font-weight:400;
   font-size:.58em;color:var(--gold);line-height:.9;
 }
+.gunungan{color:var(--gold)}
 
 /* ================= COVER ================= */
 .cover{
@@ -98,29 +102,28 @@ img{display:block;max-width:100%}
 }
 .btn-open:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(0,0,0,.45)}
 
-/* ================= HALAMAN ================= */
-.page{
-  max-width:480px;margin:0 auto;min-height:100vh;
-  background:var(--base);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23D9A441' stroke-opacity='0.05'%3E%3Cellipse cx='42' cy='20' rx='15' ry='21'/%3E%3Cellipse cx='42' cy='64' rx='15' ry='21'/%3E%3Cellipse cx='20' cy='42' rx='21' ry='15'/%3E%3Cellipse cx='64' cy='42' rx='21' ry='15'/%3E%3C/g%3E%3C/svg%3E");
-  box-shadow:0 0 70px rgba(0,0,0,.6);
-  padding:0 20px 42px;
-}
-.page section{padding:48px 0 6px}
+/* ================= HALAMAN (full-bleed) ================= */
+.page{min-height:100vh}
+.page section{padding:48px var(--pad-x) 6px}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}
 .reveal.visible{opacity:1;transform:none}
 
-/* ---------- hero foto full-bleed ---------- */
+/* ---------- hero: foto selebar viewport, berulang horizontal ---------- */
 .hero{
-  margin:0 -20px;padding:64px 22px 58px;text-align:center;position:relative;
-  background:url("assets/kisah-2.jpg") center 22%/cover no-repeat;
-  overflow:hidden;
+  min-height:96vh;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:70px 20px 110px;
+  background:url("assets/kisah-2.jpg") center top/auto 100% repeat-x #2A180B;
 }
 .hero::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(rgba(28,15,4,.58),rgba(28,15,4,.38) 45%,rgba(28,15,4,.82));
+  background:linear-gradient(rgba(28,15,4,.5),rgba(28,15,4,.22) 42%,rgba(46,26,10,.78) 82%,var(--base));
 }
-.hero > *{position:relative;z-index:1}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(58% 62% at 50% 42%,transparent 55%,rgba(28,15,4,.42));
+}
+.hero > *{position:relative;z-index:2}
 .hero-names{font-size:3.6rem;color:#F4D488;text-shadow:0 4px 18px rgba(0,0,0,.55)}
 .hero-ribbon{width:110px;margin:10px auto 0}
 .hero-date{
@@ -136,13 +139,20 @@ img{display:block;max-width:100%}
   box-shadow:0 10px 22px rgba(0,0,0,.4);
 }
 .hero-btn{margin-top:22px}
+.hero-flourish{position:absolute;bottom:56px;width:104px;opacity:.85;z-index:2}
+.fl-left{left:12px}
+.fl-right{right:12px;transform:scaleX(-1)}
+.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:52px;z-index:2}
+.wave-top{top:-1px;bottom:auto;transform:scaleY(-1)}
 
 /* ---------- ayat: satu-satunya panel terang ---------- */
 .verse{
   background:linear-gradient(165deg,#E7C26E,#DCAB54);
-  border-radius:22px;padding:36px 24px 34px !important;margin-top:44px;
+  border-radius:22px;padding:36px 24px 34px !important;
+  margin:44px max(20px, calc((100% - 860px)/2)) 0;
   text-align:center;box-shadow:var(--shadow);
 }
+.verse .gunungan.small{color:#7C5222}
 .verse .arabic{font-family:"Cormorant Garamond",serif;font-size:1.3rem;line-height:2.1;color:#43300F;padding:0 2px}
 .verse-text{font-style:italic;line-height:1.8;color:#4A2E1C;margin-top:14px;font-size:.96rem}
 .verse-src{margin-top:12px;font-weight:600;letter-spacing:.1em;font-size:.84rem;color:#6E4A1F}
@@ -170,16 +180,15 @@ img{display:block;max-width:100%}
 .person-desc{line-height:1.75;color:var(--cream-dim);font-size:.94rem;margin-top:8px}
 .couple-amp{font-family:"Great Vibes",cursive;font-size:2.7rem;color:var(--gold);margin-top:24px;line-height:1}
 
-/* ---------- save the date: panel foto ---------- */
+/* ---------- save the date: foto full-bleed ---------- */
 .savethedate{
-  margin-top:48px;text-align:center;border-radius:22px;overflow:hidden;
-  padding:36px 20px 38px !important;position:relative;
-  background:url("assets/kisah-1.jpg") center 25%/cover no-repeat;
-  box-shadow:var(--shadow);
+  margin-top:52px;text-align:center;position:relative;overflow:hidden;
+  padding:64px max(20px, calc((100% - 760px)/2)) !important;
+  background:url("assets/kisah-1.jpg") center top/auto 100% repeat-x #2A180B;
 }
 .savethedate::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(rgba(28,15,4,.66),rgba(28,15,4,.78));
+  background:linear-gradient(rgba(28,15,4,.68),rgba(28,15,4,.8));
 }
 .savethedate > *{position:relative;z-index:1}
 .countdown{display:flex;gap:10px;justify-content:center;margin:22px 0 24px}
@@ -191,10 +200,11 @@ img{display:block;max-width:100%}
 .cd-num{display:block;font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:700;line-height:1;color:var(--gold-2)}
 .cd-label{display:block;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;margin-top:5px;color:var(--gold-soft)}
 
-/* ---------- acara: panel gelap ---------- */
+/* ---------- acara: panel gelap terpusat ---------- */
 .events{
-  margin-top:48px;background:var(--panel);border-radius:24px;
-  padding:38px 18px 30px !important;box-shadow:var(--shadow);
+  margin:52px max(18px, calc((100% - 1120px)/2)) 0;
+  background:var(--panel);border-radius:24px;
+  padding:38px 26px 30px !important;box-shadow:var(--shadow);
 }
 .event-card{
   background:var(--card);border:1px solid rgba(217,164,65,.35);border-radius:20px;
@@ -283,12 +293,13 @@ img{display:block;max-width:100%}
 
 /* ---------- penutup: foto full-bleed ---------- */
 .closing{
-  margin:48px -20px 0;padding:56px 24px 50px !important;text-align:center;position:relative;
-  background:url("assets/kisah-3.jpg") center 25%/cover no-repeat;overflow:hidden;
+  margin-top:56px;text-align:center;position:relative;overflow:hidden;
+  padding:96px max(20px, calc((100% - 760px)/2)) 84px !important;
+  background:url("assets/kisah-3.jpg") center top/auto 100% repeat-x #2A180B;
 }
 .closing::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(rgba(28,15,4,.72),rgba(28,15,4,.85));
+  background:linear-gradient(rgba(28,15,4,.66),rgba(28,15,4,.86));
 }
 .closing > *{position:relative;z-index:1}
 .closing p{line-height:1.85;color:var(--cream);font-size:.97rem;max-width:46ch;margin:0 auto 14px}
@@ -296,7 +307,7 @@ img{display:block;max-width:100%}
 .closing-from{margin-top:22px !important}
 .closing-names{font-size:2.9rem;color:#F4D488;text-shadow:0 3px 14px rgba(0,0,0,.5)}
 .closing-family{font-size:.87rem !important;color:var(--cream-dim) !important}
-.footer{margin-top:34px;text-align:center;font-size:.72rem;line-height:1.65;color:#B29468}
+.footer{padding:28px 20px 30px;text-align:center;font-size:.72rem;line-height:1.65;color:#B29468}
 
 /* ---------- tombol melayang ---------- */
 .music-btn{
@@ -317,21 +328,20 @@ img{display:block;max-width:100%}
 @media (min-width:1024px){
   .cover-inner{width:470px}
   .cover-names{font-size:3.6rem}
-  .page{max-width:1080px;padding:0 56px 56px}
   .page section{padding-top:64px}
-  .hero{margin:0 -56px;padding:110px 40px 96px}
+  .hero{min-height:100vh;padding-bottom:130px}
   .hero-names{font-size:5.4rem}
+  .hero-flourish{width:150px;bottom:64px}
+  .fl-left{left:26px}
+  .fl-right{right:26px}
   .section-title{font-size:2.4rem}
-  .verse{max-width:860px;margin-left:auto;margin-right:auto;padding:44px 48px 40px !important}
   .verse .arabic{font-size:1.45rem}
   .verse-text{max-width:640px;margin-left:auto;margin-right:auto}
   .couple-grid{flex-direction:row;align-items:flex-start;justify-content:center;gap:36px}
   .person{padding-top:36px}
   .arch-photo.big{width:252px}
   .couple-amp{margin-top:150px}
-  .savethedate{max-width:760px;margin-left:auto;margin-right:auto}
   .cd-box{width:80px}
-  .events{max-width:1020px;margin-left:auto;margin-right:auto;padding:44px 30px 34px !important}
   .events-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
   .event-card{margin-bottom:0}
   .story-item{display:grid;grid-template-columns:42% 58%;margin-bottom:24px}
@@ -346,17 +356,6 @@ img{display:block;max-width:100%}
   .gift-physical{max-width:640px;margin-left:auto;margin-right:auto}
   .rsvp-form{max-width:640px;margin-left:auto;margin-right:auto}
   .wish-list{max-width:640px;margin-left:auto;margin-right:auto}
-  .closing{margin:64px -56px 0}
-}
-@media (min-width:1400px){
-  body::before,body::after{
-    content:"";position:fixed;top:50%;transform:translateY(-50%);
-    width:120px;height:300px;z-index:1;pointer-events:none;opacity:.16;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 250'%3E%3Cpath fill='%23D9A441' d='M100 2 C118 34 146 62 154 104 C160 136 150 168 128 192 L126 214 H118 L116 198 C110 202 90 202 84 198 L82 214 H74 L72 192 C50 168 40 136 46 104 C54 62 82 34 100 2 Z'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-size:contain;
-  }
-  body::before{left:26px}
-  body::after{right:26px;transform:translateY(-50%) scaleX(-1)}
 }
 @media (max-width:380px){
   .cover-names{font-size:2.7rem}
@@ -364,6 +363,7 @@ img{display:block;max-width:100%}
   .cd-box{width:58px}
   .guest-name{font-size:1.32rem}
   .salam{font-size:1.8rem}
+  .hero-flourish{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .reveal{transition:none;opacity:1;transform:none}
