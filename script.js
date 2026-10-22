@@ -127,6 +127,8 @@
     document.getElementById("cover").classList.add("opened");
     document.getElementById("mainContent").hidden = false;
     document.getElementById("musicBtn").hidden = false;
+    var gb = document.querySelector(".gift-btn");
+    if (gb) gb.hidden = false;
     document.body.style.overflow = "";
     Music.start();
     syncMusicIcon();
