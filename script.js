@@ -1,14 +1,17 @@
 /* ============================================================
-   Undangan Digital Sekar & Bagas — logika halaman
-   Nama tamu dibaca dari path URL: /nama-tamu/
-   (fallback: ?to=, lalu sessionStorage dari 404.html)
+   Undangan Digital Sekar & Bagas — logika halaman + gerak
+   Nama tamu dari path URL: /nama-tamu/
+   Animasi: GSAP + ScrollTrigger, cadangan IntersectionObserver
    ============================================================ */
 (function () {
   "use strict";
 
   var WEDDING_DATE = new Date("2026-06-20T08:00:00+07:00");
   var LS_KEY = "undangan-sekar-bagas:wishes:v1";
-  var REPO_BASE = "undangan-online"; // segmen dasar repo di GitHub Pages
+  var REPO_BASE = "undangan-online";
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var HAS_GSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+  if (HAS_GSAP) window.gsap.registerPlugin(window.ScrollTrigger);
 
   /* ---------- nama tamu ---------- */
   function slugToName(slug) {
@@ -122,9 +125,107 @@
     btn.classList.toggle("playing", playing);
   }
 
+  /* ---------- animasi ---------- */
+  var animStarted = false;
+
+  function fallbackReveal() {
+    var items = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      items.forEach(function (el) { el.classList.add("visible"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("visible");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  function heroIntro() {
+    if (!HAS_GSAP || REDUCED) return;
+    var gsap = window.gsap;
+    var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.fromTo(".hero-gun", { autoAlpha: 0, y: -26, scale: 0.7 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.85 })
+      .fromTo(".hero .kicker", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.6 }, "-=0.4")
+      .fromTo(".hero-names span", { autoAlpha: 0, y: 46 }, { autoAlpha: 1, y: 0, duration: 0.95, stagger: 0.13 }, "-=0.35")
+      .fromTo(".hero-ribbon", { autoAlpha: 0, scale: 0.8 }, { autoAlpha: 1, scale: 1, duration: 0.6 }, "-=0.5")
+      .fromTo([".hero-date", ".hero-place"], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.1 }, "-=0.35")
+      .fromTo(".hero-btn", { autoAlpha: 0, y: 16, scale: 0.92 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.55 }, "-=0.3")
+      .fromTo(".hero-flourish", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.1 }, "-=0.4")
+      .fromTo(".hero .wave", { yPercent: 100 }, { yPercent: 0, duration: 0.7 }, "-=0.6");
+    gsap.to(".hero-gun", { y: 8, duration: 2.6, ease: "sine.inOut", repeat: -1, yoyo: true, delay: 1.4 });
+  }
+
+  function initAnimations() {
+    if (animStarted) return;
+    animStarted = true;
+    if (!HAS_GSAP || REDUCED) { fallbackReveal(); return; }
+    var gsap = window.gsap;
+    document.documentElement.classList.add("gsap-on");
+
+    /* kemunculan tiap bagian saat masuk layar */
+    gsap.utils.toArray(".reveal").forEach(function (el) {
+      gsap.fromTo(el, { autoAlpha: 0, y: 34 }, {
+        autoAlpha: 1, y: 0, duration: 1.05, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 88%", once: true }
+      });
+    });
+
+    /* kelompok yang muncul berurutan */
+    var groups = [
+      { sel: ".countdown .cd-box", from: { y: 26, scale: 0.85 }, stagger: 0.09, ease: "back.out(2.2)" },
+      { sel: ".events-grid .event-card", from: { y: 42 }, stagger: 0.15 },
+      { sel: ".gallery-grid .g-item", from: { y: 30, scale: 0.94 }, stagger: 0.07 },
+      { sel: ".couple-grid .person", from: { y: 38 }, stagger: 0.17 },
+      { sel: ".gift-grid .bank-card", from: { y: 34 }, stagger: 0.13 },
+      { sel: ".story-item", from: { y: 46 }, stagger: 0.13 }
+    ];
+    groups.forEach(function (g) {
+      var els = gsap.utils.toArray(g.sel);
+      if (!els.length) return;
+      var from = Object.assign({ autoAlpha: 0 }, g.from);
+      var anchor = els[0].closest("section") || els[0];
+      gsap.fromTo(els, from, {
+        autoAlpha: 1, y: 0, scale: 1, duration: 0.9,
+        ease: g.ease || "power3.out", stagger: g.stagger,
+        scrollTrigger: { trigger: anchor, start: "top 82%", once: true }
+      });
+    });
+
+    /* foto latar bergeser pelan mengikuti scroll */
+    [".hero", ".savethedate", ".closing"].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (!el) return;
+      gsap.fromTo(el, { backgroundPosition: "0px 0%" }, {
+        backgroundPosition: "0px 100%", ease: "none",
+        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true }
+      });
+    });
+
+    /* foto isi: zoom sangat pelan saat melewati layar */
+    gsap.utils.toArray(".arch-photo img, .story-photo img").forEach(function (img) {
+      gsap.fromTo(img, { scale: 1.14 }, {
+        scale: 1, ease: "none",
+        scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: true }
+      });
+    });
+
+    window.addEventListener("load", function () { window.ScrollTrigger.refresh(); });
+  }
+
+  function coverIntro() {
+    if (!HAS_GSAP || REDUCED) return;
+    window.gsap.fromTo(".cover-inner",
+      { autoAlpha: 0, y: 28, scale: 0.98 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: 0.95, ease: "power3.out", delay: 0.15 });
+  }
+
   /* ---------- buka undangan ---------- */
-  function openInvitation() {
-    document.getElementById("cover").classList.add("opened");
+  function showContent() {
     document.getElementById("mainContent").hidden = false;
     document.getElementById("musicBtn").hidden = false;
     var gb = document.querySelector(".gift-btn");
@@ -132,8 +233,26 @@
     document.body.style.overflow = "";
     Music.start();
     syncMusicIcon();
-    initReveal();
     window.scrollTo(0, 0);
+  }
+
+  function openInvitation() {
+    var cover = document.getElementById("cover");
+    if (HAS_GSAP && !REDUCED) {
+      var gsap = window.gsap;
+      showContent();
+      initAnimations();
+      gsap.to(".cover-inner", { y: -18, autoAlpha: 0, duration: 0.45, ease: "power2.in" });
+      gsap.to(cover, {
+        autoAlpha: 0, duration: 0.65, delay: 0.15, ease: "power2.inOut",
+        onComplete: function () { cover.classList.add("opened"); }
+      });
+      gsap.delayedCall(0.4, heroIntro);
+    } else {
+      cover.classList.add("opened");
+      showContent();
+      initAnimations();
+    }
   }
 
   /* ---------- hitung mundur ---------- */
@@ -241,27 +360,6 @@
     });
   }
 
-  /* ---------- animasi saat scroll ---------- */
-  var revealStarted = false;
-  function initReveal() {
-    if (revealStarted) return;
-    revealStarted = true;
-    var items = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window)) {
-      items.forEach(function (el) { el.classList.add("visible"); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add("visible");
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    items.forEach(function (el) { io.observe(el); });
-  }
-
   /* ---------- init ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "hidden";
@@ -271,6 +369,7 @@
     initCopy();
     initForm();
     renderWishes();
+    coverIntro();
     document.getElementById("btnOpen").addEventListener("click", openInvitation);
     document.getElementById("musicBtn").addEventListener("click", function () {
       Music.toggle();
