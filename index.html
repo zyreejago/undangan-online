@@ -20,24 +20,46 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Ornamen gunungan bersama -->
+<!-- Ornamen gunungan bersama: kayon berukir -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="gunungan-detail" viewBox="0 0 200 250">
-      <path fill="currentColor" d="M100 2 C118 34 146 62 154 104 C160 136 150 168 128 192 L126 214 H118 L116 198 C110 202 90 202 84 198 L82 214 H74 L72 192 C50 168 40 136 46 104 C54 62 82 34 100 2 Z"/>
-      <path fill="#1E1108" opacity=".22" d="M100 30 C112 54 130 76 135 104 C140 128 132 152 118 170 L116 186 H84 L82 170 C68 152 60 128 65 104 C70 76 88 54 100 30 Z"/>
-      <g fill="none" stroke="#1E1108" stroke-width="3" stroke-linecap="round" opacity=".28">
-        <path d="M100 46 c6 10 6 20 0 30 c-6 -10 -6 -20 0 -30Z"/>
-        <path d="M76 92 q-12 -4 -10 -18"/>
-        <path d="M124 92 q12 -4 10 -18"/>
-        <path d="M72 128 q-12 2 -18 -8"/>
-        <path d="M128 128 q12 2 18 -8"/>
+    <path id="kayon-half" d="M120 4 C136 18 150 30 158 48 q14 -2 16 12 q1 12 -12 16 C170 92 176 104 178 118 q13 2 12 14 q0 11 -13 14 C182 160 180 176 174 192 q11 5 8 15 q-2 10 -14 11 C160 232 146 248 134 262 L120 262 Z"/>
+    <g id="kayon-full">
+      <use href="#kayon-half"/>
+      <use href="#kayon-half" transform="translate(240 0) scale(-1 1)"/>
+    </g>
+    <g id="kayon-branches">
+      <path d="M120 210 C102 206 90 196 90 184 c0 -8 8 -12 13 -8 c4 3 3 10 -3 10"/>
+      <path d="M120 172 C100 168 86 156 87 142 c1 -9 10 -12 15 -7 c4 4 2 11 -4 10"/>
+      <path d="M120 138 C104 134 94 124 96 112 c1 -8 9 -10 13 -6 c4 3 2 9 -3 8"/>
+    </g>
+    <g id="kayon-dots">
+      <circle cx="90" cy="180" r="3"/><circle cx="87" cy="138" r="3"/><circle cx="96" cy="108" r="3"/>
+    </g>
+    <symbol id="gunungan-detail" viewBox="0 0 240 292">
+      <use href="#kayon-full" fill="currentColor"/>
+      <path fill="currentColor" d="M84 262 h72 l6 12 h-84 Z M92 276 h56 l5 10 h-66 Z"/>
+      <g transform="translate(120 152) scale(.88) translate(-120 -152)" opacity=".35">
+        <use href="#kayon-full" fill="none" stroke="#1E1108" stroke-width="2.5"/>
       </g>
-      <circle cx="100" cy="104" r="9" fill="currentColor"/>
-      <circle cx="100" cy="104" r="4" fill="#1E1108" opacity=".3"/>
-      <circle cx="100" cy="132" r="4.5" fill="#1E1108" opacity=".28"/>
-      <circle cx="100" cy="152" r="3.4" fill="#1E1108" opacity=".28"/>
-      <path fill="#1E1108" opacity=".28" d="M100 162 c-8 10 -8 20 0 28 c8 -8 8 -18 0 -28Z"/>
+      <g fill="none" stroke="#2A180B" stroke-width="3.2" stroke-linecap="round" opacity=".5">
+        <path d="M120 254 C118 218 118 178 120 130"/>
+        <path d="M104 246 c4 6 10 8 16 8 c6 0 12 -2 16 -8"/>
+        <use href="#kayon-branches"/>
+        <use href="#kayon-branches" transform="translate(240 0) scale(-1 1)"/>
+        <path d="M120 130 C117 114 121 102 120 90 M120 104 c-8 -2 -12 -8 -11 -14 M120 104 c8 -2 12 -8 11 -14"/>
+        <circle cx="120" cy="56" r="13"/>
+      </g>
+      <g fill="#2A180B" opacity=".5">
+        <circle cx="120" cy="56" r="4.5"/>
+        <circle cx="120" cy="34" r="2.2"/><circle cx="139" cy="45" r="2.2"/><circle cx="139" cy="67" r="2.2"/>
+        <circle cx="120" cy="78" r="2.2"/><circle cx="101" cy="67" r="2.2"/><circle cx="101" cy="45" r="2.2"/>
+        <use href="#kayon-dots"/>
+        <use href="#kayon-dots" transform="translate(240 0) scale(-1 1)"/>
+        <path d="M76 92 c5 -5 12 -6 18 -2 c-5 1 -8 3 -10 6 c-4 -1 -7 -2 -8 -4 Z"/>
+        <path d="M146 78 c5 -4 10 -5 15 -2 c-4 1 -7 2 -8 5 c-3 -1 -6 -2 -7 -3 Z"/>
+        <path d="M120 224 c7 9 7 18 0 26 c-7 -8 -7 -17 0 -26 Z"/>
+      </g>
     </symbol>
   </defs>
 </svg>
@@ -54,7 +76,7 @@
     <p class="javanese cover-java" aria-hidden="true">&#xA9B1;&#xA9B8;&#xA992;&#xA9BC;&#xA982; &#xA9AB;&#xA9B2;&#xA9AA;&#xA9B8;</p>
     <p class="cover-kicker">The Wedding Of</p>
 
-    <svg class="gunungan" viewBox="0 0 200 250" role="img" aria-label="Gunungan wayang"><use href="#gunungan-detail"/></svg>
+    <svg class="gunungan" viewBox="0 0 240 292" role="img" aria-label="Gunungan wayang"><use href="#gunungan-detail"/></svg>
 
     <h1 class="couple-names cover-names"><span>Sekar</span><span class="amp">&amp;</span><span>Bagas</span></h1>
     <img class="cover-ribbon" src="assets/pita.png" alt="" aria-hidden="true">
@@ -77,7 +99,7 @@
 
   <!-- Hero: foto full-bleed -->
   <header class="hero reveal">
-    <svg class="gunungan hero-gun" viewBox="0 0 200 250" aria-hidden="true"><use href="#gunungan-detail"/></svg>
+    <svg class="gunungan hero-gun" viewBox="0 0 240 292" aria-hidden="true"><use href="#gunungan-detail"/></svg>
     <p class="kicker light">The Wedding Of</p>
     <h2 class="couple-names hero-names"><span>Sekar</span><span class="amp">&amp;</span><span>Bagas</span></h2>
     <img class="hero-ribbon" src="assets/pita.png" alt="" aria-hidden="true">
@@ -95,7 +117,7 @@
 
   <!-- Ayat suci -->
   <section class="verse reveal">
-    <svg class="gunungan small" viewBox="0 0 200 250" aria-hidden="true"><use href="#gunungan-detail"/></svg>
+    <svg class="gunungan small" viewBox="0 0 240 292" aria-hidden="true"><use href="#gunungan-detail"/></svg>
     <p class="arabic" lang="ar" dir="rtl">&#x0648;&#x064E;&#x0645;&#x0650;&#x0646;&#x0652; &#x0622;&#x064A;&#x064E;&#x0627;&#x062A;&#x0650;&#x0647;&#x0650; &#x0623;&#x064E;&#x0646;&#x0652; &#x062E;&#x064E;&#x0644;&#x064E;&#x0642;&#x064E; &#x0644;&#x064E;&#x0643;&#x064F;&#x0645; &#x0645;&#x0650;&#x0646;&#x0652; &#x0623;&#x064E;&#x0646;&#x0641;&#x064F;&#x0633;&#x0650;&#x0643;&#x064F;&#x0645;&#x0652; &#x0623;&#x064E;&#x0632;&#x0652;&#x0648;&#x064E;&#x0627;&#x062C;&#x064B;&#x0627; &#x0644;&#x0650;&#x062A;&#x064E;&#x0633;&#x0652;&#x0643;&#x064F;&#x0646;&#x064F;&#x0648;&#x0627; &#x0625;&#x0650;&#x0644;&#x064E;&#x064A;&#x0652;&#x0647;&#x064E;&#x0627; &#x0648;&#x064E;&#x062C;&#x064E;&#x0639;&#x064E;&#x0644;&#x064E; &#x0628;&#x064E;&#x064A;&#x0652;&#x0646;&#x064E;&#x0643;&#x064F;&#x0645; &#x0645;&#x064E;&#x0648;&#x064E;&#x062F;&#x064E;&#x0651;&#x0629;&#x064B; &#x0648;&#x064E;&#x0631;&#x064E;&#x062D;&#x0652;&#x0645;&#x064E;&#x0629;&#x064B;</p>
     <p class="verse-text">&ldquo;Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.&rdquo;</p>
     <p class="verse-src">( Q.S. Ar-Rum : 21 )</p>

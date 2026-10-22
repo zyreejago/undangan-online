@@ -167,33 +167,92 @@
     var gsap = window.gsap;
     document.documentElement.classList.add("gsap-on");
 
-    /* kemunculan tiap bagian saat masuk layar */
-    gsap.utils.toArray(".reveal").forEach(function (el) {
-      gsap.fromTo(el, { autoAlpha: 0, y: 34 }, {
-        autoAlpha: 1, y: 0, duration: 1.05, ease: "power3.out",
+    function reveal(el, from, vars) {
+      if (!el) return;
+      gsap.fromTo(el, Object.assign({ autoAlpha: 0 }, from), Object.assign({
+        autoAlpha: 1, x: 0, y: 0, scale: 1, rotation: 0, rotationX: 0,
+        duration: 1, ease: "power3.out",
         scrollTrigger: { trigger: el, start: "top 88%", once: true }
+      }, vars || {}));
+    }
+
+    /* tiap bagian punya gaya masuk sendiri */
+    var sectionFrom = {
+      "verse": { scale: 0.92, y: 44 },
+      "couple-sec": { y: 40 },
+      "savethedate": {},
+      "events": { y: 54 },
+      "story": { y: 40 },
+      "gallery": { y: 40 },
+      "gift": { y: 40 },
+      "rsvp": { y: 40 },
+      "closing": {}
+    };
+    gsap.utils.toArray(".reveal").forEach(function (el) {
+      if (el.classList.contains("hero")) return;
+      var key = null;
+      Object.keys(sectionFrom).forEach(function (k) { if (el.classList.contains(k)) key = k; });
+      reveal(el, key ? sectionFrom[key] : { y: 34 }, {});
+    });
+
+    /* mempelai: masuk dari kiri dan kanan */
+    gsap.utils.toArray(".couple-grid .person").forEach(function (person, i) {
+      reveal(person, { x: i === 0 ? -64 : 64 }, { duration: 1.1 });
+    });
+    reveal(document.querySelector(".couple-amp"), { scale: 0, rotation: -40 }, { ease: "back.out(2)", duration: 0.8 });
+
+    /* foto mempelai: terbuka seperti tirai dari atas */
+    gsap.utils.toArray(".arch-photo img").forEach(function (img) {
+      gsap.fromTo(img, { clipPath: "inset(0 0 100% 0)" }, {
+        clipPath: "inset(0 0 0% 0)", duration: 1.25, ease: "power3.inOut",
+        scrollTrigger: { trigger: img, start: "top 86%", once: true }
       });
     });
 
-    /* kelompok yang muncul berurutan */
-    var groups = [
-      { sel: ".countdown .cd-box", from: { y: 26, scale: 0.85 }, stagger: 0.09, ease: "back.out(2.2)" },
-      { sel: ".events-grid .event-card", from: { y: 42 }, stagger: 0.15 },
-      { sel: ".gallery-grid .g-item", from: { y: 30, scale: 0.94 }, stagger: 0.07 },
-      { sel: ".couple-grid .person", from: { y: 38 }, stagger: 0.17 },
-      { sel: ".gift-grid .bank-card", from: { y: 34 }, stagger: 0.13 },
-      { sel: ".story-item", from: { y: 46 }, stagger: 0.13 }
-    ];
-    groups.forEach(function (g) {
-      var els = gsap.utils.toArray(g.sel);
-      if (!els.length) return;
-      var from = Object.assign({ autoAlpha: 0 }, g.from);
-      var anchor = els[0].closest("section") || els[0];
-      gsap.fromTo(els, from, {
-        autoAlpha: 1, y: 0, scale: 1, duration: 0.9,
-        ease: g.ease || "power3.out", stagger: g.stagger,
-        scrollTrigger: { trigger: anchor, start: "top 82%", once: true }
+    /* countdown: kotak berputar jatuh satu per satu */
+    gsap.set(".countdown", { perspective: 700 });
+    gsap.fromTo(".countdown .cd-box", { autoAlpha: 0, rotationX: -92, y: 10 }, {
+      autoAlpha: 1, rotationX: 0, y: 0, duration: 0.85, ease: "back.out(1.8)", stagger: 0.1,
+      scrollTrigger: { trigger: ".savethedate", start: "top 80%", once: true }
+    });
+
+    /* kartu acara: membalik masuk dari bawah */
+    gsap.set(".events-grid", { perspective: 900 });
+    gsap.utils.toArray(".events-grid .event-card").forEach(function (card, i) {
+      gsap.fromTo(card, { autoAlpha: 0, y: 60, rotationX: 24, transformOrigin: "50% 100%" }, {
+        autoAlpha: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out", delay: i * 0.14,
+        scrollTrigger: { trigger: card, start: "top 88%", once: true }
       });
+    });
+
+    /* kisah: meluncur bergantian dari dua sisi, sedikit miring */
+    gsap.utils.toArray(".story-item").forEach(function (item, i) {
+      reveal(item, { x: i % 2 ? 64 : -64, rotation: i % 2 ? 1.4 : -1.4 }, { duration: 1.05 });
+    });
+
+    /* galeri: membesar dengan urutan acak */
+    gsap.fromTo(".gallery-grid .g-item", { autoAlpha: 0, scale: 0.78, rotation: -3 }, {
+      autoAlpha: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.6)",
+      stagger: { each: 0.07, from: "random" },
+      scrollTrigger: { trigger: ".gallery-grid", start: "top 85%", once: true }
+    });
+
+    /* kartu amplop: naik sambil membuka */
+    gsap.utils.toArray(".gift-grid .bank-card").forEach(function (card, i) {
+      reveal(card, { y: 48, rotationX: 14 }, { delay: i * 0.13, duration: 0.95 });
+    });
+
+    /* judul bagian: garis emas tumbuh di bawahnya */
+    gsap.utils.toArray(".section-title").forEach(function (t) {
+      gsap.fromTo(t, { backgroundSize: "0% 2px" }, {
+        backgroundSize: "110px 2px", duration: 1, ease: "power2.out",
+        scrollTrigger: { trigger: t, start: "top 88%", once: true }
+      });
+    });
+
+    /* ucapan: masuk dari kiri berurutan */
+    gsap.utils.toArray(".wish").forEach(function (w, i) {
+      reveal(w, { x: -30 }, { delay: (i % 3) * 0.08 });
     });
 
     /* foto latar bergeser pelan mengikuti scroll */
@@ -214,7 +273,41 @@
       });
     });
 
+    /* gelombang hero bergoyang pelan */
+    gsap.to(".hero .wave", { xPercent: -1.6, duration: 5, ease: "sine.inOut", repeat: -1, yoyo: true });
+
+    /* debu emas melayang naik di hero */
+    var hero = document.querySelector(".hero");
+    if (hero) {
+      for (var i = 0; i < 16; i++) {
+        var d = document.createElement("span");
+        d.className = "dust";
+        var size = 2 + Math.random() * 4;
+        d.style.width = size + "px";
+        d.style.height = size + "px";
+        d.style.left = (Math.random() * 100) + "%";
+        d.style.top = (55 + Math.random() * 45) + "%";
+        hero.appendChild(d);
+        gsap.fromTo(d, { autoAlpha: 0 }, {
+          autoAlpha: 0.25 + Math.random() * 0.5, duration: 2 + Math.random() * 2,
+          repeat: -1, yoyo: true, delay: Math.random() * 2, ease: "sine.inOut"
+        });
+        gsap.to(d, {
+          y: -(60 + Math.random() * 130), x: "+=" + (Math.random() * 40 - 20),
+          duration: 7 + Math.random() * 7, repeat: -1, yoyo: true, ease: "sine.inOut"
+        });
+      }
+    }
+
     window.addEventListener("load", function () { window.ScrollTrigger.refresh(); });
+  }
+
+  function startSway() {
+    if (!HAS_GSAP || REDUCED) return;
+    window.gsap.to(".cover-ribbon, .hero-ribbon", {
+      rotation: 2.6, transformOrigin: "50% 0%", duration: 2.8,
+      ease: "sine.inOut", repeat: -1, yoyo: true
+    });
   }
 
   function coverIntro() {
@@ -370,6 +463,7 @@
     initForm();
     renderWishes();
     coverIntro();
+    startSway();
     document.getElementById("btnOpen").addEventListener("click", openInvitation);
     document.getElementById("musicBtn").addEventListener("click", function () {
       Music.toggle();

@@ -35,12 +35,13 @@ img{display:block;max-width:100%}
 .section-title{
   font-family:"Bodoni Moda","Cormorant Garamond",serif;font-weight:700;
   font-size:2rem;color:var(--gold-2);text-align:center;margin:.35rem 0 1.4rem;
-  position:relative;padding-top:46px;
+  position:relative;padding-top:46px;padding-bottom:12px;
+  background:linear-gradient(var(--gold),var(--gold)) bottom center/0% 2px no-repeat;
 }
 .section-title::before{
   content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:30px;height:38px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 250'%3E%3Cpath fill='%23D9A441' d='M100 2 C118 34 146 62 154 104 C160 136 150 168 128 192 L126 214 H118 L116 198 C110 202 90 202 84 198 L82 214 H74 L72 192 C50 168 40 136 46 104 C54 62 82 34 100 2 Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  width:30px;height:37px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 292'%3E%3Cpath fill='%23D9A441' d='M120 4 C136 18 150 30 158 48 q14 -2 16 12 q1 12 -12 16 C170 92 176 104 178 118 q13 2 12 14 q0 11 -13 14 C182 160 180 176 174 192 q11 5 8 15 q-2 10 -14 11 C160 232 146 248 134 262 L106 262 C94 248 80 232 72 218 q-12 -1 -14 -11 q-3 -10 8 -15 C60 176 58 160 63 146 q-13 -3 -13 -14 q-1 -12 12 -14 C64 104 70 92 78 76 q-13 -4 -12 -16 q2 -14 16 -12 C90 30 104 18 120 4 Z'/%3E%3Cpath fill='%23D9A441' d='M84 262 h72 l6 12 h-84 Z M92 276 h56 l5 10 h-66 Z'/%3E%3Cpath stroke='%234A2E1C' stroke-width='8' fill='none' opacity='.45' d='M120 254 C118 218 118 178 120 130'/%3E%3Ccircle cx='120' cy='56' r='14' fill='none' stroke='%234A2E1C' stroke-width='7' opacity='.45'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 .couple-names{
   font-family:"Bodoni Moda","Cormorant Garamond",serif;font-weight:700;
@@ -142,7 +143,11 @@ img{display:block;max-width:100%}
 .hero-flourish{position:absolute;bottom:56px;width:104px;opacity:.85;z-index:2}
 .fl-left{left:12px}
 .fl-right{right:12px;scale:-1 1}
-.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:52px;z-index:2}
+.wave{position:absolute;left:-5%;right:auto;bottom:-1px;width:110%;height:52px;z-index:2}
+.dust{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:2;opacity:0;
+  background:radial-gradient(circle,#FFE9A8 0%,#D9A441 70%);
+}
 .wave-top{top:-1px;bottom:auto;transform:scaleY(-1)}
 
 /* ---------- ayat: satu-satunya panel terang ---------- */
