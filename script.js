@@ -1,38 +1,74 @@
 /* ============================================================
    Undangan Digital Sekar & Bagas — logika halaman
+   Nama tamu dibaca dari path URL: /nama-tamu/
+   (fallback: ?to=, lalu sessionStorage dari 404.html)
    ============================================================ */
 (function () {
   "use strict";
 
   var WEDDING_DATE = new Date("2026-06-20T08:00:00+07:00");
   var LS_KEY = "undangan-sekar-bagas:wishes:v1";
+  var REPO_BASE = "undangan-online"; // segmen dasar repo di GitHub Pages
 
-  /* ---------- nama tamu dari URL: ?to=Nama+Tamu ---------- */
-  function setGuestName() {
+  /* ---------- nama tamu ---------- */
+  function slugToName(slug) {
+    var name = String(slug || "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!name) return "";
+    if (name === name.toLowerCase()) {
+      name = name.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    }
+    return name;
+  }
+
+  function guestFromPath() {
+    var parts = window.location.pathname
+      .split("/")
+      .filter(Boolean)
+      .map(function (p) { try { return decodeURIComponent(p); } catch (e) { return p; } });
+    if (parts.length && parts[parts.length - 1] === "index.html") parts.pop();
+    if (parts.length && parts[0] === REPO_BASE) parts.shift();
+    if (!parts.length) return "";
+    var candidate = parts[parts.length - 1];
+    if (!candidate || candidate.indexOf(".") !== -1) return "";
+    return slugToName(candidate);
+  }
+
+  function resolveGuestName() {
+    var fromPath = guestFromPath();
+    if (fromPath) return fromPath;
     var params = new URLSearchParams(window.location.search);
     var to = (params.get("to") || "").trim();
-    if (to) {
-      document.getElementById("guestName").textContent = to;
-      var nameInput = document.getElementById("fName");
-      if (nameInput && !nameInput.value) nameInput.value = to;
-    }
+    if (to) return to;
+    try {
+      var saved = sessionStorage.getItem("guestName");
+      if (saved) return saved;
+    } catch (e) {}
+    return "";
+  }
+
+  function setGuestName() {
+    var name = resolveGuestName();
+    if (!name) return;
+    document.getElementById("guestName").textContent = name;
+    var input = document.getElementById("fName");
+    if (input && !input.value) input.value = name;
   }
 
   /* ---------- musik latar: petikan pentatonis lembut (WebAudio) ---------- */
   var Music = (function () {
-    var ctx = null, timer = null, playing = false;
+    var ctx = null, timer = null, playing = false, step = 0;
     var SCALE = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 587.33];
-    var step = 0;
 
     function pluck(freq, when, vol) {
       var osc = ctx.createOscillator();
       var osc2 = ctx.createOscillator();
-      var gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.value = freq;
-      osc2.type = "triangle";
-      osc2.frequency.value = freq * 2;
       var g2 = ctx.createGain();
+      var gain = ctx.createGain();
+      osc.type = "sine"; osc.frequency.value = freq;
+      osc2.type = "triangle"; osc2.frequency.value = freq * 2;
       g2.gain.value = 0.25;
       gain.gain.setValueAtTime(0.0001, when);
       gain.gain.exponentialRampToValueAtTime(vol, when + 0.02);
@@ -46,9 +82,8 @@
     function tick() {
       if (!ctx) return;
       var pattern = [0, 2, 4, 3, 5, 4, 2, 1, 0, 2, 3, 4, 6, 5, 4, 2];
-      var idx = pattern[step % pattern.length];
       var now = ctx.currentTime;
-      pluck(SCALE[idx], now, 0.11);
+      pluck(SCALE[pattern[step % pattern.length]], now, 0.11);
       if (step % 4 === 0) pluck(SCALE[0] / 2, now, 0.07);
       step++;
     }
@@ -74,16 +109,23 @@
     return {
       start: start,
       stop: stop,
-      toggle: function () { playing ? stop() : start(); return playing; },
+      toggle: function () { if (playing) { stop(); } else { start(); } return playing; },
       isPlaying: function () { return playing; }
     };
   })();
 
+  function syncMusicIcon() {
+    var btn = document.getElementById("musicBtn");
+    var playing = Music.isPlaying();
+    btn.querySelector(".ic-on").style.display = playing ? "" : "none";
+    btn.querySelector(".ic-off").style.display = playing ? "none" : "";
+    btn.classList.toggle("playing", playing);
+  }
+
   /* ---------- buka undangan ---------- */
   function openInvitation() {
     document.getElementById("cover").classList.add("opened");
-    var main = document.getElementById("mainContent");
-    main.hidden = false;
+    document.getElementById("mainContent").hidden = false;
     document.getElementById("musicBtn").hidden = false;
     document.body.style.overflow = "";
     Music.start();
@@ -92,31 +134,17 @@
     window.scrollTo(0, 0);
   }
 
-  function syncMusicIcon() {
-    var btn = document.getElementById("musicBtn");
-    var on = btn.querySelector(".ic-on");
-    var off = btn.querySelector(".ic-off");
-    var playing = Music.isPlaying();
-    on.style.display = playing ? "" : "none";
-    off.style.display = playing ? "none" : "";
-    btn.classList.toggle("playing", playing);
-  }
-
   /* ---------- hitung mundur ---------- */
   function pad(n) { return String(n).padStart(2, "0"); }
   function tickCountdown() {
     var diff = WEDDING_DATE - new Date();
-    if (diff <= 0) {
-      document.getElementById("cdDays").textContent = "00";
-      document.getElementById("cdHours").textContent = "00";
-      document.getElementById("cdMins").textContent = "00";
-      document.getElementById("cdSecs").textContent = "00";
-      return;
+    var d = 0, h = 0, m = 0, s = 0;
+    if (diff > 0) {
+      d = Math.floor(diff / 86400000);
+      h = Math.floor(diff % 86400000 / 3600000);
+      m = Math.floor(diff % 3600000 / 60000);
+      s = Math.floor(diff % 60000 / 1000);
     }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor(diff % 86400000 / 3600000);
-    var m = Math.floor(diff % 3600000 / 60000);
-    var s = Math.floor(diff % 60000 / 1000);
     document.getElementById("cdDays").textContent = pad(d);
     document.getElementById("cdHours").textContent = pad(h);
     document.getElementById("cdMins").textContent = pad(m);
@@ -129,16 +157,16 @@
       btn.addEventListener("click", function () {
         var target = document.getElementById(btn.getAttribute("data-copy"));
         if (!target) return;
-        var text = target.textContent.trim();
+        var text = target.innerText.replace(/\s*\n\s*/g, ", ").trim();
+        if (btn.getAttribute("data-copy") !== "giftAddress") {
+          text = target.textContent.trim();
+        }
         function done() {
           var old = btn.textContent;
           btn.textContent = "Tersalin";
           btn.classList.add("copied");
           setTimeout(function () { btn.textContent = old; btn.classList.remove("copied"); }, 1800);
         }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(done).catch(function () { fallback(); done(); });
-        } else { fallback(); done(); }
         function fallback() {
           var ta = document.createElement("textarea");
           ta.value = text;
@@ -147,6 +175,9 @@
           try { document.execCommand("copy"); } catch (e) {}
           document.body.removeChild(ta);
         }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(function () { fallback(); done(); });
+        } else { fallback(); done(); }
       });
     });
   }
@@ -185,9 +216,9 @@
     }
     box.innerHTML = list.map(function (w) {
       return '<article class="wish">' +
-        '<div class="wish-head"><span class="wish-name">' + escapeHtml(w.name) + '</span>' +
-        '<span class="wish-badge">' + escapeHtml(w.attend) + '</span></div>' +
-        '<p class="wish-msg">' + escapeHtml(w.msg) + '</p></article>';
+        '<div class="wish-head"><span class="wish-name">' + escapeHtml(w.name) + "</span>" +
+        '<span class="wish-badge">' + escapeHtml(w.attend) + "</span></div>" +
+        '<p class="wish-msg">' + escapeHtml(w.msg) + "</p></article>";
     }).join("");
   }
 
@@ -225,7 +256,7 @@
           io.unobserve(en.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     items.forEach(function (el) { io.observe(el); });
   }
 

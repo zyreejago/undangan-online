@@ -5,162 +5,174 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Undangan Pernikahan Sekar &amp; Bagas</title>
 <meta name="description" content="Undangan pernikahan digital Sekar Ayu Larasati dan Bagas Prasetyo Nugroho, Sabtu 20 Juni 2026 di Yogyakarta.">
+<script>
+  // URL tamu berbentuk /nama-tamu/ menggeser alamat relatif.
+  // Kunci basis dokumen ke root undangan agar style.css dan assets/ tetap ketemu.
+  (function () {
+    var seg = window.location.pathname.split("/").filter(Boolean);
+    var root = seg.length && seg[0] === "undangan-online" ? "/undangan-online/" : "/";
+    document.write('<base href="' + root + '">');
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Jost:wght@300;400;500;600&family=Noto+Sans+Javanese:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500;600&family=Noto+Sans+Javanese:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ============ COVER ============ -->
+<!-- ================= COVER ================= -->
 <div class="cover" id="cover">
-  <div class="cover-frame">
-    <p class="javanese cover-java" aria-hidden="true">&#xA98F;&#xA9B8;&#xA992;&#xA9BC;&#xA994;&#xA9CA;&#xA9AD;&#xA9BA;&#xA9AD;&#xA9C0;</p>
+  <div class="cover-inner">
+    <svg class="ukiran uk-tl" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#C6A15B" stroke-width="2"><path d="M6 94 V34 Q6 6 34 6 H94"/><path d="M16 94 V40 Q16 16 40 16 H94"/><circle cx="30" cy="30" r="4" fill="#C6A15B" stroke="none"/></g></svg>
+    <svg class="ukiran uk-tr" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#C6A15B" stroke-width="2"><path d="M6 94 V34 Q6 6 34 6 H94"/><path d="M16 94 V40 Q16 16 40 16 H94"/><circle cx="30" cy="30" r="4" fill="#C6A15B" stroke="none"/></g></svg>
+    <svg class="ukiran uk-bl" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#C6A15B" stroke-width="2"><path d="M6 94 V34 Q6 6 34 6 H94"/><path d="M16 94 V40 Q16 16 40 16 H94"/><circle cx="30" cy="30" r="4" fill="#C6A15B" stroke="none"/></g></svg>
+    <svg class="ukiran uk-br" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#C6A15B" stroke-width="2"><path d="M6 94 V34 Q6 6 34 6 H94"/><path d="M16 94 V40 Q16 16 40 16 H94"/><circle cx="30" cy="30" r="4" fill="#C6A15B" stroke="none"/></g></svg>
+
+    <p class="javanese cover-java" aria-hidden="true">&#xA9B1;&#xA9B8;&#xA992;&#xA9BC;&#xA982; &#xA9AB;&#xA9B2;&#xA9AA;&#xA9B8;</p>
     <p class="cover-kicker">The Wedding Of</p>
 
-    <svg class="gunungan" viewBox="0 0 200 240" role="img" aria-label="Ornamen gunungan">
+    <svg class="gunungan" viewBox="0 0 200 250" role="img" aria-label="Gunungan wayang">
       <defs>
-        <linearGradient id="gunGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#C6A15B"/>
-          <stop offset="1" stop-color="#8A5A2B"/>
+        <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#D9B877"/><stop offset=".55" stop-color="#B98A3E"/><stop offset="1" stop-color="#7C5222"/>
         </linearGradient>
       </defs>
-      <path fill="url(#gunGrad)" opacity="0.28" d="M100 4 C126 48 152 78 152 128 C152 176 130 208 100 226 C70 208 48 176 48 128 C48 78 74 48 100 4 Z"/>
-      <path fill="url(#gunGrad)" opacity="0.5" d="M100 30 C120 66 138 90 138 128 C138 164 122 190 100 204 C78 190 62 164 62 128 C62 90 80 66 100 30 Z"/>
-      <path fill="url(#gunGrad)" d="M100 58 C114 84 126 102 126 128 C126 154 114 172 100 182 C86 172 74 154 74 128 C74 102 86 84 100 58 Z"/>
-      <circle cx="100" cy="122" r="13" fill="#F7F0E3"/>
-      <circle cx="100" cy="122" r="6.5" fill="#5C3A21"/>
-      <path fill="#5C3A21" d="M93 196 h14 l3 26 h-20 Z"/>
-      <path fill="#8A5A2B" d="M52 150 C36 140 30 122 34 104 C46 116 52 130 52 150 Z"/>
-      <path fill="#8A5A2B" d="M148 150 C164 140 170 122 166 104 C154 116 148 130 148 150 Z"/>
+      <path fill="url(#gg)" d="M100 2 C118 34 146 62 154 104 C160 136 150 168 128 192 L126 214 H118 L116 198 C110 202 90 202 84 198 L82 214 H74 L72 192 C50 168 40 136 46 104 C54 62 82 34 100 2 Z"/>
+      <path fill="#3A2413" opacity=".28" d="M100 26 C113 51 132 73 138 104 C143 130 135 155 119 174 L117 190 H83 L81 174 C65 155 57 130 62 104 C68 73 87 51 100 26 Z"/>
+      <path fill="url(#gg)" d="M100 48 C109 66 121 82 125 102 C128 120 122 136 112 148 L110 160 H90 L88 148 C78 136 72 120 75 102 C79 82 91 66 100 48 Z"/>
+      <g stroke="#3A2413" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55">
+        <path d="M100 156 V104"/><path d="M100 118 C90 112 84 104 83 94"/><path d="M100 118 C110 112 116 104 117 94"/><path d="M100 132 C92 128 87 122 86 114"/><path d="M100 132 C108 128 113 122 114 114"/>
+      </g>
+      <circle cx="100" cy="94" r="6" fill="#3A2413" opacity=".55"/>
+      <path fill="#3A2413" opacity=".5" d="M60 178 C48 168 44 152 48 138 C58 148 62 162 60 178 Z"/>
+      <path fill="#3A2413" opacity=".5" d="M140 178 C152 168 156 152 152 138 C142 148 138 162 140 178 Z"/>
+      <rect x="88" y="216" width="24" height="7" rx="2" fill="url(#gg)"/>
+      <rect x="76" y="226" width="48" height="7" rx="2" fill="url(#gg)"/>
     </svg>
 
-    <h1 class="cover-names"><span>Sekar</span><span class="amp">&amp;</span><span>Bagas</span></h1>
-    <p class="cover-date">Sabtu, 20 Juni 2026</p>
+    <h1 class="couple-names cover-names"><span>Sekar</span><span class="amp">&amp;</span><span>Bagas</span></h1>
+    <img class="cover-ribbon" src="assets/pita.png" alt="" aria-hidden="true">
+    <p class="cover-date">Sabtu, 20 . 06 . 2026</p>
 
-    <div class="cover-guest">
-      <p>Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+    <div class="guest-card">
+      <p class="guest-to">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
       <p class="guest-name" id="guestName">Nama Tamu</p>
-      <p class="guest-note">*Mohon maaf apabila terdapat kesalahan<br>penulisan nama dan gelar</p>
+      <p class="guest-note">*Mohon maaf apabila terdapat kesalahan penulisan nama &amp; gelar</p>
+      <button class="btn-open" id="btnOpen" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        Buka Undangan
+      </button>
     </div>
-
-    <button class="btn-open" id="btnOpen" type="button">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-      Buka Undangan
-    </button>
   </div>
 </div>
 
-<!-- ============ KONTEN UTAMA ============ -->
+<!-- ================= ISI UNDANGAN ================= -->
 <main class="page" id="mainContent" hidden>
 
   <!-- Hero -->
-  <section class="hero reveal">
-    <p class="javanese hero-java" aria-hidden="true">&#xA9B1;&#xA9B8;&#xA9A2;&#xA9C1;&#xA982; &#xA9AB;&#xA9AF;&#xA9B9;</p>
+  <header class="hero reveal">
     <p class="kicker">The Wedding Of</p>
-    <h2 class="hero-names">Sekar <span class="amp">&amp;</span> Bagas</h2>
-    <p class="hero-date">Sabtu, 20 Juni 2026 &middot; Yogyakarta</p>
+    <div class="hero-photos">
+      <figure class="arch-photo"><img src="assets/mempelai-wanita.jpg" alt="Foto mempelai wanita"></figure>
+      <figure class="arch-photo"><img src="assets/mempelai-pria.jpg" alt="Foto mempelai pria"></figure>
+    </div>
+    <h2 class="couple-names hero-names"><span>Sekar</span><span class="amp">&amp;</span><span>Bagas</span></h2>
+    <img class="hero-ribbon" src="assets/pita.png" alt="" aria-hidden="true">
+    <p class="hero-date">Sabtu, 20 Juni 2026</p>
+    <p class="hero-place">Kotagede, Yogyakarta</p>
+  </header>
 
-    <div class="countdown" id="countdown" aria-label="Hitung mundur menuju hari pernikahan">
+  <!-- Ayat suci -->
+  <section class="verse reveal">
+    <svg class="gunungan small" viewBox="0 0 200 250" aria-hidden="true"><path fill="#B98A3E" d="M100 2 C118 34 146 62 154 104 C160 136 150 168 128 192 L126 214 H118 L116 198 C110 202 90 202 84 198 L82 214 H74 L72 192 C50 168 40 136 46 104 C54 62 82 34 100 2 Z"/><path fill="#F7F0E1" opacity=".85" d="M100 30 C112 54 130 76 135 104 C140 128 132 152 118 170 L116 186 H84 L82 170 C68 152 60 128 65 104 C70 76 88 54 100 30 Z"/><circle cx="100" cy="102" r="9" fill="#B98A3E"/></svg>
+    <p class="arabic" lang="ar" dir="rtl">&#x0648;&#x064E;&#x0645;&#x0650;&#x0646;&#x0652; &#x0622;&#x064A;&#x064E;&#x0627;&#x062A;&#x0650;&#x0647;&#x0650; &#x0623;&#x064E;&#x0646;&#x0652; &#x062E;&#x064E;&#x0644;&#x064E;&#x0642;&#x064E; &#x0644;&#x064E;&#x0643;&#x064F;&#x0645; &#x0645;&#x0650;&#x0646;&#x0652; &#x0623;&#x064E;&#x0646;&#x0641;&#x064F;&#x0633;&#x0650;&#x0643;&#x064F;&#x0645;&#x0652; &#x0623;&#x064E;&#x0632;&#x0652;&#x0648;&#x064E;&#x0627;&#x062C;&#x064B;&#x0627; &#x0644;&#x0650;&#x062A;&#x064E;&#x0633;&#x0652;&#x0643;&#x064F;&#x0646;&#x064F;&#x0648;&#x0627; &#x0625;&#x0650;&#x0644;&#x064E;&#x064A;&#x0652;&#x0647;&#x064E;&#x0627; &#x0648;&#x064E;&#x062C;&#x064E;&#x0639;&#x064E;&#x0644;&#x064E; &#x0628;&#x064E;&#x064A;&#x0652;&#x0646;&#x064E;&#x0643;&#x064F;&#x0645; &#x0645;&#x064E;&#x0648;&#x064E;&#x062F;&#x064E;&#x0651;&#x0629;&#x064B; &#x0648;&#x064E;&#x0631;&#x064E;&#x062D;&#x0652;&#x0645;&#x064E;&#x0629;&#x064B;</p>
+    <p class="verse-text">&ldquo;Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.&rdquo;</p>
+    <p class="verse-src">( Q.S. Ar-Rum : 21 )</p>
+  </section>
+
+  <!-- Salam dan mempelai -->
+  <section class="couple-sec reveal">
+    <h3 class="salam">Assalamu&rsquo;alaikum Warahmatullahi Wabarakatuh</h3>
+    <p class="intro-text">Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami:</p>
+
+    <div class="couple-grid">
+      <article class="person">
+        <figure class="arch-photo big"><img src="assets/mempelai-wanita.jpg" alt="Sekar Ayu Larasati"></figure>
+        <h4 class="person-name">Sekar Ayu Larasati, S.Pd.</h4>
+        <p class="person-desc">Putri kedua dari<br>Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
+      </article>
+      <p class="couple-amp">&amp;</p>
+      <article class="person">
+        <figure class="arch-photo big"><img src="assets/mempelai-pria.jpg" alt="Bagas Prasetyo Nugroho"></figure>
+        <h4 class="person-name">Bagas Prasetyo Nugroho, S.T.</h4>
+        <p class="person-desc">Putra pertama dari<br>Bapak Agus Wijaya<br>&amp; Ibu Ratna Dewi</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Save the date -->
+  <section class="savethedate reveal">
+    <p class="kicker light">Save The Date</p>
+    <div class="countdown" id="countdown">
       <div class="cd-box"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Hari</span></div>
       <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Jam</span></div>
       <div class="cd-box"><span class="cd-num" id="cdMins">00</span><span class="cd-label">Menit</span></div>
       <div class="cd-box"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">Detik</span></div>
     </div>
-
-    <a class="btn-ghost" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan%20Sekar%20%26%20Bagas&amp;dates=20260620T010000Z/20260620T060000Z&amp;details=Akad%20nikah%20dan%20resepsi%20pernikahan%20Sekar%20Ayu%20Larasati%20dan%20Bagas%20Prasetyo%20Nugroho&amp;location=Jl.%20Kenanga%20No.%208%2C%20Kotagede%2C%20Yogyakarta">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-      Simpan Tanggal
-    </a>
+    <a class="btn-light" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan%20Sekar%20%26%20Bagas&amp;dates=20260620T010000Z/20260620T060000Z&amp;details=Akad%20nikah%20dan%20resepsi%20pernikahan%20Sekar%20Ayu%20Larasati%20dan%20Bagas%20Prasetyo%20Nugroho&amp;location=Jl.%20Kenanga%20No.%208%2C%20Kotagede%2C%20Yogyakarta">Simpan Tanggal</a>
   </section>
-
-  <div class="divider" aria-hidden="true"><span></span><i></i><span></span></div>
-
-  <!-- Ayat suci -->
-  <section class="verse reveal">
-    <p class="arabic" lang="ar" dir="rtl">&#x0648;&#x064E;&#x0645;&#x0650;&#x0646;&#x0652; &#x0622;&#x064A;&#x064E;&#x0627;&#x062A;&#x0650;&#x0647;&#x0650; &#x0623;&#x064E;&#x0646;&#x0652; &#x062E;&#x064E;&#x0644;&#x064E;&#x0642;&#x064E; &#x0644;&#x064E;&#x0643;&#x064F;&#x0645;&#x0652; &#x0645;&#x0650;&#x0646;&#x0652; &#x0623;&#x064E;&#x0646;&#x0652;&#x0641;&#x064F;&#x0633;&#x0650;&#x0643;&#x064F;&#x0645;&#x0652; &#x0623;&#x064E;&#x0632;&#x0652;&#x0648;&#x064E;&#x0627;&#x062C;&#x064B;&#x0627; &#x0644;&#x0650;&#x062A;&#x064E;&#x0633;&#x0652;&#x0643;&#x064F;&#x0646;&#x064F;&#x0648;&#x0627; &#x0625;&#x0650;&#x0644;&#x064E;&#x064A;&#x0652;&#x0647;&#x064E;&#x0627; &#x0648;&#x064E;&#x062C;&#x064E;&#x0639;&#x064E;&#x0644;&#x064E; &#x0628;&#x064E;&#x064A;&#x0652;&#x0646;&#x064E;&#x0643;&#x064F;&#x0645;&#x0652; &#x0645;&#x064E;&#x0648;&#x064E;&#x062F;&#x064E;&#x0651;&#x0629;&#x064B; &#x0648;&#x064E;&#x0631;&#x064E;&#x062D;&#x0652;&#x0645;&#x064E;&#x0629;&#x064B;</p>
-    <p class="verse-text">&ldquo;Dan di antara tanda tanda kebesaran-Nya, Dia menciptakan pasangan pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.&rdquo;</p>
-    <p class="verse-src">Q.S. Ar-Rum : 21</p>
-  </section>
-
-  <!-- Salam pembuka -->
-  <section class="intro reveal">
-    <h3 class="section-title">Assalamu&rsquo;alaikum Wr. Wb.</h3>
-    <p>Dengan memohon rahmat dan ridha Allah SWT, serta tanpa mengurangi rasa hormat, kami bermaksud menyampaikan kabar bahagia sekaligus mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
-  </section>
-
-  <!-- Mempelai -->
-  <section class="couple reveal">
-    <div class="person">
-      <div class="portrait" aria-hidden="true"><span class="portrait-initial">S</span></div>
-      <p class="javanese person-java" aria-hidden="true">&#xA9A5;&#xA994;&#xA9BA;&#xA9A0;&#xA9C1;&#xA9A4;&#xA9C8;&#xA9A4;&#xA9C0;&#xA9AB;&#xA9B6;</p>
-      <h3 class="person-name">Sekar Ayu Larasati, S.Pd.</h3>
-      <p class="person-desc">Putri kedua dari<br>Bapak H. Bambang Sutrisno<br>dan Ibu Hj. Sri Wahyuni</p>
-    </div>
-
-    <p class="couple-amp">&amp;</p>
-
-    <div class="person">
-      <div class="portrait" aria-hidden="true"><span class="portrait-initial">B</span></div>
-      <p class="javanese person-java" aria-hidden="true">&#xA9A5;&#xA994;&#xA9BA;&#xA9A0;&#xA9C1;&#xA9A4;&#xA9C8;&#xA9A4;&#xA9C0;&#xA9A7;&#xA9A7;&#xA982;</p>
-      <h3 class="person-name">Bagas Prasetyo Nugroho, S.T.</h3>
-      <p class="person-desc">Putra pertama dari<br>Bapak Agus Wijaya<br>dan Ibu Ratna Dewi</p>
-    </div>
-  </section>
-
-  <div class="divider" aria-hidden="true"><span></span><i></i><span></span></div>
 
   <!-- Rangkaian acara -->
   <section class="events reveal">
-    <p class="kicker">Save The Date</p>
-    <h3 class="section-title">Rangkaian Acara</h3>
+    <div class="events-grid">
+      <article class="event-card">
+        <svg class="event-orn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="14.5" r="5.2"/><circle cx="15.3" cy="10.3" r="5.2"/></svg>
+        <h4 class="event-name">Akad Nikah</h4>
+        <p class="event-day">Sabtu</p>
+        <p class="event-date"><strong>20</strong><span>Juni<br>2026</span></p>
+        <p class="event-time">Pukul 08.00 WIB s.d. Selesai</p>
+        <p class="event-place"><strong>Kediaman Mempelai Wanita</strong><br>Jl. Kenanga No. 8, Kotagede,<br>Kota Yogyakarta</p>
+        <a class="btn-brown" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Kotagede%2C+Yogyakarta">Lihat Lokasi</a>
+      </article>
 
-    <article class="event-card">
-      <svg class="ring-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="14" r="5.5"/><circle cx="15.5" cy="10.5" r="5.5"/></svg>
-      <h4>Akad Nikah</h4>
-      <p class="event-day">Sabtu</p>
-      <p class="event-date"><strong>20</strong> Juni 2026</p>
-      <p class="event-time">Pukul 08.00 WIB s.d. selesai</p>
-      <p class="event-place">Kediaman Mempelai Wanita<br>Jl. Kenanga No. 8, Kotagede, Yogyakarta</p>
-      <a class="btn-ghost small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Kotagede%2C+Yogyakarta">Lihat Lokasi</a>
-    </article>
-
-    <article class="event-card">
-      <svg class="ring-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21c-4.5-3.2-8-6.6-8-10.4C4 7.4 6.4 5 9.2 5c1.7 0 2.8.9 2.8.9s1.1-.9 2.8-.9C17.6 5 20 7.4 20 10.6c0 3.8-3.5 7.2-8 10.4Z"/></svg>
-      <h4>Resepsi</h4>
-      <p class="event-day">Sabtu</p>
-      <p class="event-date"><strong>20</strong> Juni 2026</p>
-      <p class="event-time">Pukul 11.00 s.d. 13.00 WIB</p>
-      <p class="event-place">Pendopo Kenanga<br>Jl. Kenanga No. 8, Kotagede, Yogyakarta</p>
-      <a class="btn-ghost small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Kotagede%2C+Yogyakarta">Lihat Lokasi</a>
-    </article>
+      <article class="event-card">
+        <svg class="event-orn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20.5C7.8 17.4 4.5 14.2 4.5 10.8 4.5 8.3 6.4 6.5 8.7 6.5c1.4 0 2.7.7 3.3 1.7.6-1 1.9-1.7 3.3-1.7 2.3 0 4.2 1.8 4.2 4.3 0 3.4-3.3 6.6-7.5 9.7Z"/></svg>
+        <h4 class="event-name">Resepsi</h4>
+        <p class="event-day">Sabtu</p>
+        <p class="event-date"><strong>20</strong><span>Juni<br>2026</span></p>
+        <p class="event-time">Pukul 11.00 s.d. 13.00 WIB</p>
+        <p class="event-place"><strong>Pendopo Kenanga</strong><br>Jl. Kenanga No. 8, Kotagede,<br>Kota Yogyakarta</p>
+        <a class="btn-brown" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Kotagede%2C+Yogyakarta">Lihat Lokasi</a>
+      </article>
+    </div>
   </section>
 
   <!-- Kisah kami -->
   <section class="story reveal">
     <p class="kicker">Our Story</p>
     <h3 class="section-title">Kisah Kami</h3>
-
-    <div class="timeline">
+    <div class="story-list">
       <article class="story-item">
-        <p class="story-year">2019</p>
-        <h4>Awal Bertemu</h4>
-        <p>Kami pertama kali berjumpa di sebuah acara komunitas literasi di Yogyakarta. Obrolan sore itu bermula dari buku yang sama sama kami pegang, lalu berlanjut menjadi percakapan panjang yang sulit berhenti.</p>
+        <figure class="story-photo"><img src="assets/kisah-1.jpg" alt="Momen pertemuan pertama"></figure>
+        <div class="story-body">
+          <h4>Pertemuan</h4>
+          <p>Kami bertemu pada tahun 2019 di sebuah acara komunitas literasi di Yogyakarta. Berawal dari buku yang sama-sama kami pegang, obrolan sore itu mengalir begitu saja, sebelum akhirnya kami terpisah oleh kesibukan dan cita-cita masing-masing.</p>
+        </div>
       </article>
       <article class="story-item">
-        <p class="story-year">2023</p>
-        <h4>Dipertemukan Lagi</h4>
-        <p>Empat tahun berlalu dengan jalan masing masing. Takdir mempertemukan kami kembali di sebuah kedai kopi kecil, dan kali ini kami sepakat untuk tidak saling kehilangan kabar lagi.</p>
+        <figure class="story-photo"><img src="assets/kisah-2.jpg" alt="Momen bertemu kembali"></figure>
+        <div class="story-body">
+          <h4>Bertemu Kembali</h4>
+          <p>Empat tahun berselang, takdir mempertemukan kami lagi di sebuah kedai kopi kecil di sudut kota. Kali ini tidak ada lagi kata berpisah; kami memutuskan untuk saling menjaga kabar dan menata niat dengan lebih serius.</p>
+        </div>
       </article>
       <article class="story-item">
-        <p class="story-year">2025</p>
-        <h4>Lamaran</h4>
-        <p>Dengan restu kedua keluarga, Bagas menyampaikan niat baiknya pada Desember 2025. Air mata bahagia sore itu menjadi penanda bahwa perjalanan kami siap melangkah ke jenjang yang lebih serius.</p>
-      </article>
-      <article class="story-item">
-        <p class="story-year">2026</p>
-        <h4>Hari Bahagia</h4>
-        <p>Kini kami sampai di babak yang paling kami nantikan. Dengan penuh syukur, kami akan menyempurnakan separuh agama dan memulai rumah tangga yang sakinah, mawaddah, warahmah.</p>
+        <figure class="story-photo"><img src="assets/kisah-3.jpg" alt="Momen lamaran"></figure>
+        <div class="story-body">
+          <h4>Lamaran</h4>
+          <p>Dengan restu kedua keluarga, Bagas menyampaikan pinangannya pada Desember 2025. Dalam suasana sederhana dan hangat, Sekar menerima lamaran itu, dan sejak hari itu kami resmi melangkah menuju pelaminan.</p>
+        </div>
       </article>
     </div>
   </section>
@@ -168,44 +180,42 @@
   <!-- Galeri -->
   <section class="gallery reveal">
     <p class="kicker">Our Gallery</p>
-    <h3 class="section-title">Galeri Momen</h3>
+    <h3 class="section-title">Galeri Kami</h3>
     <div class="gallery-grid">
-      <figure class="g-item g-a"><span>S &amp; B</span><figcaption>Sore di Kotagede</figcaption></figure>
-      <figure class="g-item g-b"><span>&#x2766;</span><figcaption>Motif Kawung</figcaption></figure>
-      <figure class="g-item g-c"><span>2019</span><figcaption>Pertemuan Pertama</figcaption></figure>
-      <figure class="g-item g-d"><span>&amp;</span><figcaption>Dua Hati</figcaption></figure>
-      <figure class="g-item g-e"><span>2025</span><figcaption>Hari Lamaran</figcaption></figure>
-      <figure class="g-item g-f"><span>S &amp; B</span><figcaption>Menuju Halal</figcaption></figure>
+      <figure class="g-item"><img src="assets/mempelai-wanita.jpg" alt="Galeri mempelai wanita"></figure>
+      <figure class="g-item"><img src="assets/kisah-2.jpg" alt="Galeri momen berdua"></figure>
+      <figure class="g-item"><img src="assets/mempelai-pria.jpg" alt="Galeri mempelai pria"></figure>
+      <figure class="g-item"><img src="assets/kisah-1.jpg" alt="Galeri momen pertama"></figure>
+      <figure class="g-item"><img src="assets/kisah-3.jpg" alt="Galeri momen lamaran"></figure>
+      <figure class="g-item"><img src="assets/kisah-2.jpg" alt="Galeri momen bahagia"></figure>
     </div>
-    <p class="gallery-note">Ruang ini nantinya diisi foto prewedding kedua mempelai.</p>
   </section>
-
-  <div class="divider" aria-hidden="true"><span></span><i></i><span></span></div>
 
   <!-- Amplop digital -->
   <section class="gift reveal">
     <p class="kicker">Wedding Gift</p>
     <h3 class="section-title">Amplop Digital</h3>
-    <p class="gift-intro">Doa restu Bapak/Ibu/Saudara/i adalah hadiah terindah bagi kami. Namun apabila berkenan memberi tanda kasih secara cashless, kami sediakan dengan penuh terima kasih:</p>
+    <p class="gift-intro">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
 
-    <div class="gift-card">
-      <p class="gift-bank">BCA</p>
-      <p class="gift-number" id="accBca">0371428890</p>
-      <p class="gift-owner">a.n. Sekar Ayu Larasati</p>
-      <button class="btn-copy" type="button" data-copy="accBca">Salin Nomor</button>
+    <div class="gift-grid">
+      <div class="bank-card">
+        <img class="bank-logo" src="assets/bank-bca.png" alt="Logo BCA">
+        <p class="bank-number" id="accBca">0371428890</p>
+        <p class="bank-owner">a.n. Sekar Ayu Larasati</p>
+        <button class="btn-copy" type="button" data-copy="accBca">Salin Nomor</button>
+      </div>
+      <div class="bank-card">
+        <img class="bank-logo" src="assets/bank-dana.png" alt="Logo DANA">
+        <p class="bank-number" id="accDana">081234567890</p>
+        <p class="bank-owner">a.n. Sekar Ayu Larasati</p>
+        <button class="btn-copy" type="button" data-copy="accDana">Salin Nomor</button>
+      </div>
     </div>
 
-    <div class="gift-card">
-      <p class="gift-bank">DANA</p>
-      <p class="gift-number" id="accDana">081234567890</p>
-      <p class="gift-owner">a.n. Sekar Ayu Larasati</p>
-      <button class="btn-copy" type="button" data-copy="accDana">Salin Nomor</button>
-    </div>
-
-    <div class="gift-card">
-      <p class="gift-bank">Kirim Hadiah Fisik</p>
-      <p class="gift-address" id="giftAddress">Sekar Ayu Larasati, Jl. Kenanga No. 8, Kotagede, Yogyakarta 55173</p>
-      <button class="btn-copy" type="button" data-copy="giftAddress">Salin Alamat</button>
+    <div class="gift-physical">
+      <h4>Kirim Hadiah Fisik</h4>
+      <p id="giftAddress">Nama: Sekar Ayu Larasati<br>Alamat: Jl. Kenanga No. 8, Kotagede, Kota Yogyakarta 55173</p>
+      <button class="btn-copy dark" type="button" data-copy="giftAddress">Salin Alamat</button>
     </div>
   </section>
 
@@ -213,7 +223,7 @@
   <section class="rsvp reveal">
     <p class="kicker">RSVP</p>
     <h3 class="section-title">Ucapan &amp; Doa</h3>
-    <p class="rsvp-intro">Berikan ucapan terbaik untuk kedua mempelai dan bantu kami mempersiapkan acara dengan mengisi konfirmasi kehadiran di bawah ini.</p>
+    <p class="rsvp-intro">Berikan ucapan terbaik untuk kedua mempelai, dan bantu kami mempersiapkan acara dengan mengisi formulir RSVP di bawah ini.</p>
 
     <form class="rsvp-form" id="rsvpForm">
       <label>Nama
@@ -221,7 +231,7 @@
       </label>
       <label>Konfirmasi Kehadiran
         <select id="fAttend" required>
-          <option value="Hadir">Hadir, insya Allah</option>
+          <option value="Hadir">Hadir, Insya Allah</option>
           <option value="Belum Pasti">Masih Ragu</option>
           <option value="Tidak Hadir">Berhalangan Hadir</option>
         </select>
@@ -229,26 +239,23 @@
       <label>Ucapan &amp; Doa
         <textarea id="fMsg" rows="3" required maxlength="300" placeholder="Tulis ucapan dan doa terbaik Anda"></textarea>
       </label>
-      <button class="btn-open" type="submit">Kirim Ucapan</button>
+      <button class="btn-open form-btn" type="submit">Kirim Ucapan</button>
     </form>
 
     <div class="wish-list" id="wishList" aria-live="polite"></div>
   </section>
 
-  <div class="divider" aria-hidden="true"><span></span><i></i><span></span></div>
-
   <!-- Penutup -->
   <section class="closing reveal">
-    <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami beserta keluarga apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
-    <p>Atas kehadiran serta doa yang tulus, kami mengucapkan terima kasih yang sebesar besarnya.</p>
-    <h3 class="section-title">Wassalamu&rsquo;alaikum Wr. Wb.</h3>
+    <p>Atas kehadiran dan doa restu dari Bapak/Ibu/Saudara/i sekalian, kami mengucapkan terima kasih yang sebesar-besarnya.</p>
+    <h3 class="salam">Wassalamu&rsquo;alaikum Warahmatullahi Wabarakatuh</h3>
     <p class="closing-from">Kami yang berbahagia,</p>
-    <p class="closing-names">Sekar &amp; Bagas</p>
-    <p class="closing-family">Beserta keluarga besar Bapak H. Bambang Sutrisno dan Bapak Agus Wijaya</p>
+    <p class="couple-names closing-names"><span>Sekar</span><span class="amp">&amp;</span><span>Bagas</span></p>
+    <p class="closing-family">Beserta keluarga besar Bapak H. Bambang Sutrisno &amp; Bapak Agus Wijaya</p>
   </section>
 
   <footer class="footer">
-    <p>Undangan digital ini adalah contoh karya. Nama, tanggal, dan nomor rekening bersifat fiktif untuk keperluan demo.</p>
+    <p>Contoh undangan digital. Nama, tanggal, dan nomor rekening bersifat fiktif; foto adalah placeholder referensi untuk keperluan demo.</p>
   </footer>
 </main>
 

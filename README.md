@@ -17,13 +17,18 @@ Contoh undangan pernikahan digital satu halaman dengan tema Jawa bernuansa umber
 
 ## Personalisasi nama tamu
 
-Nama tamu dibaca dari parameter URL `to`, contoh:
+Nama tamu dibaca dari **path URL**, sama seperti undangan digital pada umumnya. Segmen terakhir alamat menjadi nama tamu (tanda hubung dibaca sebagai spasi), contoh:
 
 ```
-index.html?to=Bapak+Joko+Prasetyo
+https://zyreejago.github.io/undangan-online/bapak-joko-prasetyo/
 ```
 
-Tanpa parameter, tampil teks bawaan "Nama Tamu".
+akan menampilkan nama "Bapak Joko Prasetyo" di cover. Agar pola ini jalan di hosting statis, repo ini dilengkapi:
+
+- `vercel.json` — rewrite satu segmen path ke `index.html` (untuk deploy Vercel).
+- `404.html` — untuk GitHub Pages: menangkap path nama tamu, menyimpannya, lalu mengalihkan ke halaman undangan.
+
+Bentuk cadangan `index.html?to=Bapak+Joko+Prasetyo` juga tetap didukung.
 
 ## Menjalankan
 

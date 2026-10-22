@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan Sekar &amp; Bagas</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#2A180B;color:#EBD9AC;font-family:Georgia,serif;letter-spacing:.14em}
+</style>
+<script>
+  // GitHub Pages menyajikan file ini untuk path yang tidak dikenal,
+  // misalnya /undangan-online/bapak-joko-prasetyo/
+  // Ambil segmen terakhir sebagai nama tamu, simpan, lalu masuk ke undangan.
+  (function () {
+    function slugToName(slug) {
+      var name = String(slug || "").replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+      if (name && name === name.toLowerCase()) {
+        name = name.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      }
+      return name;
+    }
+    var parts = window.location.pathname.split("/").filter(Boolean);
+    var idx = parts.indexOf("undangan-online");
+    var rest = idx >= 0 ? parts.slice(idx + 1) : parts;
+    var guest = rest.length ? rest[rest.length - 1] : "";
+    if (guest && guest.indexOf(".") === -1) {
+      try { sessionStorage.setItem("guestName", slugToName(guest)); } catch (e) {}
+    }
+    var base = idx >= 0 ? "/" + parts.slice(0, idx + 1).join("/") + "/" : "/";
+    window.location.replace(base);
+  })();
+</script>
+</head>
+<body>
+<p>Memuat undangan&hellip;</p>
+</body>
+</html>
